@@ -17,7 +17,7 @@ Recent planning methods based on LLMs typically employ the In-Context Learning p
 
 <div align='center'>
   <video id="video" controls="" preload="none" poster="作者(图片地址)">
-    <source id="mp4" src="https://github.com/Mongoosesyf/DiEP.github.io/blob/main/samll.mp4" type="video/mp4">
+    <source id="mp4" src="https://github.com/tannl/FLTRNN.github.io/blob/main/small.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -25,7 +25,7 @@ Recent planning methods based on LLMs typically employ the In-Context Learning p
 Example of our frameworks for long-horizon task planning:
 
 <div align='center'>
-  <img src="https://github.com/Mongoosesyf/DiEP.github.io/blob/main/result.PNG">
+  <img src="https://github.com/tannl/FLTRNN.github.io/blob/main/result.PNG">
 </div>
 
 ## Methodology
@@ -35,13 +35,13 @@ The framework uses the task description as input and outputs the task plan. Our 
 3. Input the combined long and short-term memories and the environment observation into the LLM to retrieve the sub-task plan. Update memory simultaneously and repeat the above steps until the task is complete.
 
 <div align='center'>
-  <img src="https://github.com/Mongoosesyf/DiEP.github.io/blob/main/RNN.PNG">
+  <img src="https://github.com/tannl/FLTRNN.github.io/blob/main/RNN.PNG">
 </div>
 
 <br/>
 
 <div align='center'>
-  <img src="https://github.com/Mongoosesyf/DiEP.github.io/blob/main/details.PNG">
+  <img src="https://github.com/tannl/FLTRNN.github.io/blob/main/details.PNG">
 </div>
 
 ## BibTeX
