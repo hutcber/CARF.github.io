@@ -25,7 +25,7 @@ Recent planning methods based on LLMs typically employ the In-Context Learning p
 Example of our frameworks for long-horizon task planning:
 
 <div align='center'>
-  <img src="https://github.com/tannl/FLTRNN.github.io/blob/main/result.PNG">
+  <img src="https://img-blog.csdnimg.cn/7258e2ea68b04befacc6f34bd731c268.png">
 </div>
 
 ## Methodology
@@ -35,13 +35,13 @@ The framework uses the task description as input and outputs the task plan. Our 
 3. Input the combined long and short-term memories and the environment observation into the LLM to retrieve the sub-task plan. Update memory simultaneously and repeat the above steps until the task is complete.
 
 <div align='center'>
-  <img src="https://github.com/tannl/FLTRNN.github.io/blob/main/RNN.PNG">
+  <img src="https://img-blog.csdnimg.cn/aae970d1b957498aa83e3cfd9f0e9a57.png">
 </div>
 
 <br/>
 
 <div align='center'>
-  <img src="https://github.com/tannl/FLTRNN.github.io/blob/main/details.PNG">
+  <img src="https://img-blog.csdnimg.cn/5b6bb19b0f534fe49aa2cafec9d614b1.png">
 </div>
 
 ## BibTeX
