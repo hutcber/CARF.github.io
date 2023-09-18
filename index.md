@@ -25,7 +25,8 @@ Recent planning methods based on LLMs typically employ the In-Context Learning p
 Example of our frameworks for long-horizon task planning:
 
 <div align='center'>
-  <img src="https://github.com/tannl/FLTRNN.github.io/blob/main/result.PNG">
+  <img src="https://raw.githubusercontent.com/tannl/FLTRNN.github.io/master/result.png">
+  https://raw.githubusercontent.com/tannl/FLTRNN.github.io/master/result.png
 </div>
 
 ## Methodology
