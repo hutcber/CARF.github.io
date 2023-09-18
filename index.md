@@ -36,7 +36,7 @@ The framework uses the task description as input and outputs the task plan. Our 
 <br/>
 
 <div align='center'>
-  <img src="./detalis.PNG">
+  <img src="./details.PNG">
 </div>
 
 ## BibTeX
