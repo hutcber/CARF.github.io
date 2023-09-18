@@ -18,7 +18,7 @@ Recent planning methods based on LLMs typically employ the In-Context Learning p
 
 <div align='center'>
   <video id="video" controls="" preload="none" poster="作者(图片地址)">
-    <source src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+    <source id="mp4 src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0" type="video/mp4">
   </video>
 </div>
 
