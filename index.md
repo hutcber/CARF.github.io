@@ -39,4 +39,6 @@ Our framework takes the task goal as input and produces the task plan as output.
   <img src="./Method_full_3.png">
 </div>
 
-## BibTeX
+## Appendix
+### 1.Prompt of Task Decomposition
+
