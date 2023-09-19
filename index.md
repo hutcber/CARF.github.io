@@ -42,7 +42,7 @@ Our framework takes the task goal as input and produces the task plan as output.
 ## Appendix
 ### 1.Prompt of Task Decomposition
 
- <h3 style="text-align: center;">**Listing 1**: Prompt for finishing task decomposition,we only need to input the Fixed-format task goal in the dataset</h3>
+<div style="text-align: center;">**Listing 1**: Prompt for finishing task decomposition,we only need to input the Fixed-format task goal in the dataset</div>
 <div style="background-color: #f2f2f2; padding: 10px;">
 Please split the task goal，and there are some examples:
 Task Goal: on_poundcake_kitchentable(id:123): 1,on_milk_kitchentable(id:123): 1, #The goal means the task is "put one poundcake on kitchentable and put one milk on kitchentable" #so we can split the goal into 2 subgoal,follow this return format exactly. return subgoal[on_poundcake_kitchentable(id:123): 1], subgoal[on_milk_kitchentable(id:123): 1]
