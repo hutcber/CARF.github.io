@@ -30,7 +30,7 @@ The framework uses the task description as input and outputs the task plan. Our 
 3. Input the combined long and short-term memories and the environment observation into the LLM to retrieve the sub-task plan. Update memory simultaneously and repeat the above steps until the task is complete.
 
 <div align='center'>
-  <img src="./RNN.PNG">
+  <img src="./Method_simple_9_00.png">
 </div>
 
 <br/>
