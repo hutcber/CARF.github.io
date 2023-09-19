@@ -21,7 +21,6 @@ Example of our frameworks for long-horizon task planning:
 
 <div align='center'>
   <img src="./result.PNG">
-  <iframe src="./Exp_example_1.pdf" width="100%" height="100%"/>
 </div>
 
 ## Methodology
@@ -37,7 +36,7 @@ The framework uses the task description as input and outputs the task plan. Our 
 <br/>
 
 <div align='center'>
-  <img src="./details.PNG">
+  <img src="./Method_full_3.png">
 </div>
 
 ## BibTeX
