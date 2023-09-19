@@ -64,6 +64,7 @@ Our framework takes the task goal as input and produces the task plan as output.
 <div style="text-align: center;">Listing 1: Prompt for finishing task decomposition,we only need to input the Fixed-format task goal in the dataset</div>
 <div class="textbox">
     <p class="smaller-font">
+    <pre>
 Please split the task goal，and there are some examples:
 
       
@@ -88,5 +89,6 @@ Task Goal:closed_stove(id:150): 1,turnon_stove(id:150): 1,inside_poundcake_stove
 return subgoal[closed_stove(id:150):1,turnon_stove(id:150):1 ,inside_poundcake_stove(id:150):3],subgoal[on_milk_kitchentable(id:123): 2]
 
 Task Goal:{input} 
+</pre>
     </p>
 
