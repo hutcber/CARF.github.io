@@ -42,3 +42,10 @@ Our framework takes the task goal as input and produces the task plan as output.
 ## Appendix
 ### 1.Prompt of Task Decomposition
 
+<div style="background-color: #f2f2f2; padding: 10px;">
+    <h2 style="text-align: center;">标题</h2>
+    
+    **加粗文本**
+    
+    普通文本
+</div>
