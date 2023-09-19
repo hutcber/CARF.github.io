@@ -21,7 +21,7 @@ Example of our frameworks for long-horizon task planning:
 
 <div align='center'>
   <img src="./result.PNG">
-  <embed src="./Method_simple_9.pdf" type="application/pdf" width="100%" height="100%"/>
+  <iframe src="./Exp_example_1.pdf" width="100%" height="100%"/>
 </div>
 
 ## Methodology
