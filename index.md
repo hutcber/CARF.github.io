@@ -401,4 +401,241 @@ putback('chicken(id:333)', 'kitchentable(id:123)')
 </div>
 
 ### B.Experiments
-We have adopted the prompt construction method from ProgPrompt[6] but do not include interaction with the environment.The planning-only method consists of embedding {task_goal}(he current task goal) and {message}(the initial observed state of the environment) directly into the prompt, allowing the agent to generate a complete plan for the task.
+#### 1.Implement of Planning-only
+We have adopted the prompt construction method from ProgPrompt but do not include interaction with the environment.The planning-only method consists of embedding {task_goal}(he current task goal) and {message}(the initial observed state of the environment) directly into the prompt, allowing the agent to generate a complete plan for the task.
+<div style="text-align: center;">Listing 5:The full prompt with LLM of planning-only agent to implement task planning</div>
+<div class="textbox">
+    <p class="smaller-font">
+    <pre>
+from actions import walk (obj), grab (obj), switchon (obj), switchoff (obj), open (obj), close (obj), putin (obj) (obj), putback (obj) (obj)
+#remeber if the key object INSIDE kitchencabinet, you should open the kitchencabinet first or the key object INSIDE room, you should walk to the roomand different id represent different items, so note the id number.
+#remeber you should grab only one item at a time and you can not open a cabinet that has been opened
+      
+#There are some examples:
+      
+#remember the key object locations and states: [["stove(id:150)", "INSIDE", "kitchen(id:50)"], ["chicken(id:332)", "INSIDE", "microwave(id:158)"]["chicken(id:333)", "INSIDE", "microwave(id:158)"]] and stove(id:150)'s states are closed,off,microwave(id:158)'s state is closed, 
+#The task goal: closed_stove(id:150): 1,turnon_stove(id:150): 1,inside_chicken_stove(id:150): 2, 
+def task():
+#The goal means the task is "put two chickens in stove and switch on stove" 
+#1.find the first chicken
+walk('kitchen(id:50)')
+find('microwave(id:158)')
+open('microwave(id:158)')
+grab('chicken(id:332)')
+close('microwave(id:158)')
+#2.put the chicken in stove
+find('stove(id:150)')
+open('stove(id:150)')
+putin('chicken(id:332)', 'stove(id:150)')
+close('stove(id:150)')
+#3.find the second chicken
+walk('kitchen(id:50)')
+find('microwave(id:158)')
+open('microwave(id:158)')
+grab('chicken(id:333)')
+close('microwave(id:158)')
+#4.put the chicken in stove
+open('stove(id:150)')
+putin('chicken(id:333)', 'stove(id:150)')
+close('stove(id:150)')
+We have adopted the prompt construction method from ProgPrompt[6] but do not include interaction with the 
+environment.The planning-only method consists of embedding {task_goal}(he current task goal) and {message
+}(the initial observed state of the environment) directly into the prompt, allowing the agent to generate a 
+complete plan for the task.
+#5.switch on the stove
+switchon('stove(id:150)')
+#6.done
+
+#remember the key object locations and states: [["microwave(id:158)", "INSIDE", "kitchen(id:50)"], ["stove(id:150)", "INSIDE", "kitchen(id:50)"], ["pancake(id:342)", "INSIDE", "livingroom(id:262)"], ["cupcake(id:332)", "INSIDE", "kitchencabinet(id:130)"], ["cupcake(id:333)", "INSIDE", "kitchencabinet(id:126)"], ["cupcake(id:334)", "INSIDE", "kitchencabinet(id:131)"]] and stove(id:150)'s states are closed,off,microwave(id:158)'s states are closed,off,kitchencabinet(id:130)'s state is closed,kitchencabinet(id:126)'s state is closed,kitchencabinet(id:131)'s state is closed, 
+#The task goal: closed_microwave(id:158): 1,turnon_microwave(id:158): 1,closed_stove(id:150): 1,turnon_stove(id:150):1,inside_pancake_microwave(id:158): 1,inside_cupcake_stove(id:150): 1, 
+def task():
+#The goal means the task is "put one pancake in microwave and switch on microwave, put one cupcake in stove and switch on stove".
+#1.find one pancake
+walk('livingroom(id:262)')
+find('pancake(id:342)')
+grab('pancake(id:342)')
+#2.put the pancake in microwave
+find('microwave(id:158)')
+open('microwave(id:158)')
+putin('pancake(id:342)', 'microwave(id:158)')
+close('microwave(id:158)')
+#3.switch on the microwave
+switchon('microwave(id:158)')
+#4.find one cupcake
+walk('kitchen(id:50)')
+find('kitchencabinet(id:130)')
+open('kitchencabinet(id:130)')
+find('cupcake(id:332)')
+grab('cupcake(id:332)')
+close('kitchencabinet(id:130)')
+#5.put the cupcake in stove
+find('stove(id:150)')
+open('stove(id:150)')
+putin('cupcake(id:332)', 'stove(id:150)')
+close('stove(id:150)')
+#6.switch on the stove
+switchon('stove(id:150)')
+#done
+
+#remember the key object locations and states: [["kitchentable(id:123)", "INSIDE", "kitchen(id:50)"], ["poundcake(id:332)", "INSIDE", "stove(id:150)"], ["poundcake(id:348)", "INSIDE", "cabinet(id:222)"], ["milk(id:333)","INSIDE", "kitchencabinet(id:127)"], ["milk(id:334)", "INSIDE", "kitchencabinet(id:128)"], ["milk(id:335)", "INSIDE", "kitchencabinet(id:127)"]] and stove(id:150)'s state is closed,cabinet(id:222)'s states is closed,kitchencabinet(id:127)'s state is closed,kitchencabinet(id:128)'s state is closed,
+#The task goal: on_poundcake_kitchentable(id:123): 1,on_milk_kitchentable(id:123): 1, 
+def task():
+#The goal means the task is "put one poundcake on kitchentable and put one milk on kitchentable" 
+#1.find one poundcake
+walk('kitchen(id:50)')
+find('stove(id:150)')
+open('stove(id:150)')
+find('poundcake(id:332)')
+grab('poundcake(id:332)')
+close('stove(id:150)')
+#2.put the poundcake on the kitchentable
+find('kitchentable(id:123)')
+putback('poundcake(id:332)', 'kitchentable(id:123)')
+#3.find one milk
+find('kitchencabinet(id:127)')
+open('kitchencabinet(id:127)')
+find('milk(id:333)')
+grab('milk(id:333)')
+close('kitchencabinet(id:127)')
+#4.put the milk on the kitchentable
+walk('kitchen(id:50)')
+putback('milk(id:333)', 'kitchentable(id:123)')
+#5.done
+
+#remember the key object locations and states: {message}
+#The task goal: {task_goal}
+def task():
+
+    </pre>
+  </p>
+</div>
+
+<div style="text-align: center;">An example of planning-only method, full interaction process of the task goal {on_chicken_kitchentable(id:123): 2}</div>
+<div class="textbox">
+    <p class="smaller-font">
+    <pre>
+------------------------------------------------input prompt-------------------------------------------------------------
+from actions import walk (obj), grab (obj), switchon (obj), switchoff (obj), open (obj), close (obj), putin (obj) (obj), putback (obj) (obj)
+
+#remeber if the key object INSIDE kitchencabinet, you should open the kitchencabinet first or the key object INSIDE room, you should walk to the room and different id represent different items, so note the id number.
+#remeber you should grab only one item at a time and you can not open a cabinet that has been opened
+
+#There are some examples:
+
+#remember the key object locations and states: [["stove(id:150)", "INSIDE", "kitchen(id:50)"], ["chicken(id:332)","INSIDE", "microwave(id:158)"]["chicken(id:333)", "INSIDE", "microwave(id:158)"]] and stove(id:150)'s states are closed,off,microwave(id:158)'s state is closed, 
+#The task goal: closed_stove(id:150): 1,turnon_stove(id:150): 1,inside_chicken_stove(id:150): 2, 
+def task():
+#The goal means the task is "put two chickens in stove and switch on stove" 
+#1.find the first chicken
+walk('kitchen(id:50)')
+find('microwave(id:158)')
+open('microwave(id:158)')
+grab('chicken(id:332)')
+close('microwave(id:158)')
+#2.put the chicken in stove
+find('stove(id:150)')
+open('stove(id:150)')
+putin('chicken(id:332)', 'stove(id:150)')
+close('stove(id:150)')
+#3.find the second chicken
+walk('kitchen(id:50)')
+find('microwave(id:158)')
+open('microwave(id:158)')
+grab('chicken(id:333)')
+close('microwave(id:158)')
+#4.put the chicken in stove
+open('stove(id:150)')
+putin('chicken(id:333)', 'stove(id:150)')
+close('stove(id:150)')
+#5.switch on the stove
+switchon('stove(id:150)')
+#6.done
+
+#remember the key object locations and states: [["microwave(id:158)", "INSIDE", "kitchen(id:50)"], ["stove(id:150)", "INSIDE", "kitchen(id:50)"], ["pancake(id:342)", "INSIDE", "livingroom(id:262)"], ["cupcake(id:332)", "INSIDE", "kitchencabinet(id:130)"], ["cupcake(id:333)", "INSIDE", "kitchencabinet(id:126)"], ["cupcake(id:334)", "INSIDE", "kitchencabinet(id:131)"]] and stove(id:150)'s states are closed,off,microwave(id:158)'s states are closed,off,kitchencabinet(id:130)'s state is closed,kitchencabinet(id:126)'s state is closed,kitchencabinet(id:131)'s state is closed, 
+#The task goal: closed_microwave(id:158): 1,turnon_microwave(id:158): 1,closed_stove(id:150): 1,turnon_stove(id:150): 1,inside_pancake_microwave(id:158): 1,inside_cupcake_stove(id:150): 1, 
+def task():
+#The goal means the task is "put one pancake in microwave and switch on microwave, put one cupcake in stove and switch on stove". 
+#1.find one pancake
+walk('livingroom(id:262)')
+find('pancake(id:342)')
+grab('pancake(id:342)')
+#2.put the pancake in microwave
+find('microwave(id:158)')
+open('microwave(id:158)')
+putin('pancake(id:342)', 'microwave(id:158)')
+close('microwave(id:158)')
+#3.switch on the microwave
+switchon('microwave(id:158)')
+#4.find one cupcake
+walk('kitchen(id:50)')
+find('kitchencabinet(id:130)')
+open('kitchencabinet(id:130)')
+find('cupcake(id:332)')
+grab('cupcake(id:332)')
+close('kitchencabinet(id:130)')
+#5.put the cupcake in stove
+find('stove(id:150)')
+open('stove(id:150)')
+putin('cupcake(id:332)', 'stove(id:150)')
+close('stove(id:150)')
+#6.switch on the stove
+switchon('stove(id:150)')
+#done
+
+#remember the key object locations and states: [["kitchentable(id:123)", "INSIDE", "kitchen(id:50)"], ["poundcake(id:332)", "INSIDE", "stove(id:150)"], ["poundcake(id:348)", "INSIDE", "cabinet(id:222)"], ["milk(id:333)", "INSIDE", "kitchencabinet(id:127)"], ["milk(id:334)", "INSIDE", "kitchencabinet(id:128)"], ["milk(id:335)", "INSIDE", "kitchencabinet(id:127)"]] and stove(id:150)'s state is closed,cabinet(id:222)'s states is closed,kitchencabinet(id:127)'s state is closed,kitchencabinet(id:128)'s state is closed, 
+#The task goal: on_poundcake_kitchentable(id:123): 1,on_milk_kitchentable(id:123): 1, 
+def task():
+#The goal means the task is "put one poundcake on kitchentable and put one milk on kitchentable" 
+#1.find one poundcake
+walk('kitchen(id:50)')
+find('stove(id:150)')
+open('stove(id:150)')
+find('poundcake(id:332)')
+grab('poundcake(id:332)')
+close('stove(id:150)')
+#2.put the poundcake on the kitchentable
+find('kitchentable(id:123)')
+putback('poundcake(id:332)', 'kitchentable(id:123)')
+#3.find one milk
+find('kitchencabinet(id:127)')
+open('kitchencabinet(id:127)')
+find('milk(id:333)')
+grab('milk(id:333)')
+close('kitchencabinet(id:127)')
+#4.put the milk on the kitchentable
+walk('kitchen(id:50)')
+putback('milk(id:333)', 'kitchentable(id:123)')
+#5.done
+
+#remember the key object locations and states: [('chicken(id:333)', 'INSIDE', 'fridge(id:149)'), ('chicken(id:334)','INSIDE', 'stove(id:150)'), ('chicken(id:332)', 'INSIDE', 'fridge(id:149)')] and fridge(id:149)'s state is closed,stove(id:150)'s state is closed, 
+#The task goal: on_chicken_kitchentable(id:123): 2, 
+def task():
+-------------------------------------------------------end----------------------------------------------------------
+
+--------------------------------------------planning-only agent output-------------------------------------------------- 
+#The goal means the task is "put two chickens on kitchentable" 
+#1.find the first chicken in fridge
+walk('kitchen(id:50)')
+find('fridge(id:149)')
+open('fridge(id:149)')
+find('chicken(id:333)')
+grab('chicken(id:333)')
+close('fridge(id:149)')
+#2.put the first chicken on the kitchentable
+find('kitchentable(id:123)')
+putback('chicken(id:333)', 'kitchentable(id:123)')
+#3.find the second chicken in fridge
+find('fridge(id:149)')
+open('fridge(id:149)')
+find('chicken(id:332)')
+grab('chicken(id:332)')
+close('fridge(id:149)')
+#4.put the second chicken on the kitchentable
+find('kitchentable(id:123)')
+putback('chicken(id:332)', 'kitchentable(id:123)')
+#5.done
+      
+    </pre>
+  </p>
+</div>
+#### 2.Implement of Planning-Reasoning
