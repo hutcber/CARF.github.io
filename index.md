@@ -125,6 +125,7 @@ def task():
   </pre>
   </p>
 </div>
+
 <div style="text-align: center;">Listing 3:In the short-term memory, dynamically select three examples according to the current task goal and insert them into the prompt.Here is a set of examples to choose from.</div>
 <div class="textbox">
     <p class="smaller-font">
@@ -286,7 +287,8 @@ putback('chicken(id:333)', 'kitchentable(id:123)')
   </pre>
   </p>
 </div>
-<div style="text-align: center;">isting 4: An example of our method, full interaction process of the task goal {on_chicken_kitchentable(id:123): 2}</div>
+
+<div style="text-align: center;">Listing 4: An example of our method, full interaction process of the task goal {on_chicken_kitchentable(id:123): 2}</div>
 <div class="textbox">
     <p class="smaller-font">
     <pre>
@@ -641,4 +643,5 @@ putback('chicken(id:332)', 'kitchentable(id:123)')
     </pre>
   </p>
 </div>
+
 #### 2.Implement of Planning-Reasoning
