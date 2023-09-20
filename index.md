@@ -40,7 +40,8 @@ Our framework takes the task goal as input and produces the task plan as output.
 </div>
 
 ## Appendix
-### 1.Prompt of Task Decomposition
+### A.Method
+#### 1.Prompt of Task Decomposition
 
 <style>
     .textbox {
@@ -92,10 +93,15 @@ Task Goal:{input}
   </pre>
   </p>
 </div>
+
+#### 2.Prompt of Task Planning
+
 <div style="text-align: center;">Listing 2: The full prompt with LLM of our agent to implement task planning</div>
+
 <div class="textbox">
     <p class="smaller-font">
     <pre>
+
 long-term memory:
       
 from actions import walk (obj), grab (obj), switchon (obj), switchoff (obj), open (obj), close (obj), putin (obj) (obj), putback (obj) (obj)
@@ -120,3 +126,4 @@ def task():
   </p>
 </div>
 
+### B.Experiments
