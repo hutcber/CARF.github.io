@@ -398,7 +398,6 @@ find('kitchentable(id:123)')
 putback('chicken(id:333)', 'kitchentable(id:123)')
 #done
 -------------------------------------------------------end---------------------------------------------------------
-    
     </pre>
   </p>
 </div>
@@ -510,7 +509,6 @@ putback('milk(id:333)', 'kitchentable(id:123)')
 #remember the key object locations and states: {message}
 #The task goal: {task_goal}
 def task():
-
     </pre>
   </p>
 </div>
@@ -638,8 +636,7 @@ close('fridge(id:149)')
 #4.put the second chicken on the kitchentable
 find('kitchentable(id:123)')
 putback('chicken(id:332)', 'kitchentable(id:123)')
-#5.done
-      
+#5.done   
     </pre>
   </p>
 </div>
