@@ -642,3 +642,190 @@ putback('chicken(id:332)', 'kitchentable(id:123)')
 </div>
 
 #### 2.Implement of Planning-Reasoning
+In tackling complex task planning, various prior works have explored LLMs playing different roles to complete tasks .Each role takes on distinct responsibilities, thereby alleviating the reasoning burden associated with complex tasks.Our planning-reasoning method delegates the entire task planning process to different roles assumed by LLM. Two agents, acting as the planner and reasoner respectively, collaborate in this method. The reasoner is responsible for comprehending the overall task objective and instructs the planner on the execution steps required. The planner, on the other hand, focuses on action planning for individual execution steps.Like other methods, each planner will accept input of the current initial environment information.
+
+<div style="text-align: center;">List 7: Full prompt for reasoner, the only input is {task_goal}</div>
+<div class="textbox">
+    <p class="smaller-font">
+    <pre>
+Now you are a task planning assistant, responsible for inferring the execution steps of a task.You should mimic the provided examples and, based on the task objectives,understand the total task goal first, generate the next sub-task. 
+There are some examples:
+      
+Task goal: on_poundcake_kitchentable(id:123): 1,on_milk_kitchentable(id:123): 1, 
+#The goal means "put one poundcake on kitchentable and put one milk on kitchentable" 
+Reasoning task lists:
+#1.put one poundcake on the kitchentable(id:123)
+#2.put one milk on the kitchentable(id:123)
+
+Task goal: closed_dishwasher(id:152): 1,turnon_dishwasher(id:152): 1,inside_chicken_dishwasher(id:152): 2, 
+#The goal means the task is "put two chickens in dishwasher and switch on dishwasher" 
+Reasoning task lists:
+#1.put two chickens in dishwasher and switch on dishwasher(id:152)
+
+Task goal: closed_microwave(id:158): 1,turnon_microwave(id:158): 1,closed_stove(id:150): 1,turnon_stove(id:150): 1,inside_pancake_microwave(id:158): 1,inside_cupcake_stove(id:150): 1, 
+#The goal means the task is "put one pancake in microwave and switch on microwave, put one cupcake in stove and switch on stove". 
+Reasoning task lists:
+#1.put one pancake in microwave(id:158) and switch on microwave(id:158)
+#2.put one cupcake in stove(id:150) and switch on stove(id:150)
+
+Task Goal:closed_stove(id:150): 1,turnon_stove(id:150): 1,inside_poundcake_stove(id:150): 3,on_milk_kitchentable(id:123): 2,
+#The goal means the task is "put three poundcakes in stove and switch on stove, put two milk on kitchentable" 
+Reasoning task lists:
+#1.put three poundcakes in stove(id:150) and switch on stove(id:150)
+#2.put two milk on kitchentable(id:123)
+
+Imitate these examples to generate a step-by-step plan. 
+Task goal: {task_goal}
+Reason task lists:
+    </pre>
+  </p>
+</div>
+
+<div style="text-align: center;">List 8: Full prompt for planner.</div>
+<div class="textbox">
+    <p class="smaller-font">
+    <pre>
+Now you are a task planning assistant. You should mimic the examples I provide and generate a sequence of actions based on the target instructions and environmental information.Pay attention to the task objectives and environmental information.And remember if the key object INSIDE kitchencabinet, you should open the kitchencabinet first,or the key object INSIDE room, you should walk to the room,and different id represent different items, so note the id number.Remember you should grab only one item at a time and you can not open a cabinet that has been opened. 
+
+There are some examples:
+
+Now the task is: # put two chickens in stove and switch on stove
+#remember the key object locations and states: [["stove(id:150)", "INSIDE", "kitchen(id:50)"], ["chicken(id:332)", "INSIDE", "microwave(id:158)"]["chicken(id:333)", "INSIDE", "microwave(id:158)"]] and stove(id:150)'s states are closed,off,microwave(id:158)'s state is closed, 
+Planning action lists:
+#1.find the first chicken
+walk('kitchen(id:50)')
+find('microwave(id:158)')
+open('microwave(id:158)')
+grab('chicken(id:332)')
+close('microwave(id:158)')
+#2.put the chicken in stove
+find('stove(id:150)')
+open('stove(id:150)')
+putin('chicken(id:332)', 'stove(id:150)')
+close('stove(id:150)')
+#3.find the second chicken
+walk('kitchen(id:50)')
+find('microwave(id:158)')
+open('microwave(id:158)')
+grab('chicken(id:333)')
+close('microwave(id:158)')
+#4.put the chicken in stove
+open('stove(id:150)')
+putin('chicken(id:333)', 'stove(id:150)')
+close('stove(id:150)')
+#5.switch on the stove
+switchon('stove(id:150)')
+#6.done
+
+Now the task is: # put one poundcake on kitchentable
+#remember the key object locations and states: [["kitchentable(id:123)", "INSIDE", "kitchen(id:50)"], ["poundcake(id:332)", "INSIDE", "stove(id:150)"], ["poundcake(id:348)", "INSIDE", "cabinet(id:222)"], ["milk(id:333)","INSIDE", "kitchencabinet(id:127)"], ["milk(id:334)", "INSIDE", "kitchencabinet(id:128)"], ["milk(id:335)", "INSIDE", "kitchencabinet(id:127)"]] and stove(id:150)'s state is closed,cabinet(id:222)'s states is closed,kitchencabinet(id:127)'s state is closed,kitchencabinet(id:128)'s state is closed, 
+Planning action lists:
+#1.find one poundcake
+walk('kitchen(id:50)')
+find('stove(id:150)')
+open('stove(id:150)')
+find('poundcake(id:332)')
+grab('poundcake(id:332)')
+close('stove(id:150)')
+#2.put the poundcake on the kitchentable
+find('kitchentable(id:123)')
+putback('poundcake(id:332)', 'kitchentable(id:123)')
+
+Now the task is: # put two milk on kitchentable
+#remember the key object locations and states: [('milk(id:332)', 'INSIDE', 'kitchencabinet(id:128)'), ('milk(id:333)','INSIDE', 'kitchencabinet(id:130)')] and kitchencabinet(id:128)'s state is closed,kitchencabinet(id:130)'s state is closed,kitchencabinet(id:126)'s state is closed, 
+Planning action lists:
+#1.find the first milk
+walk('kitchen(id:50)')
+find('kitchencabinet(id:128)')
+open('kitchencabinet(id:128)')
+find('milk(id:332)')
+grab('milk(id:332)')
+close('kitchencabinet(id:128)')
+#2.put the first milk on the kitchentable
+find('kitchentable(id:123)')
+putback('milk(id:332)', 'kitchentable(id:123)')
+#3.find the second milk
+find('kitchencabinet(id:130)')
+open('kitchencabinet(id:130)')
+find('milk(id:333)')
+grab('milk(id:333)')
+close('kitchencabinet(id:130)')
+#4.put the second milk on the kitchentable
+find('kitchentable(id:123)')
+putback('milk(id:333)', 'kitchentable(id:123)')
+
+Now the task is: # switch/turn on microwave
+#remember the key object locations and states: [["milk(id:335)", "INSIDE", "kitchencabinet(id:127)"]] and microwave(id:158)'s state is closed,kitchencabinet(id:127)'s state is closed, 
+Planning action lists:
+#1.switch on the microwave
+switchon('microwave(id:158)')
+
+Imitate these examples to generate an action list. 
+Now the task is: {reasoner_output}
+#remember the key object locations and states:{message}
+Planning action lists:
+    </pre>
+  </p>
+</div>
+
+<div style="text-align: center;">Listing 9: Full interaction process of the task goal {closed_microwave(id:158): 1,turnon_microwave(id:158): 1,on_milk_kitchentable(id:123): 3,inside_pancake_microwave(id:158): 1}</div>
+<div class="textbox">
+    <p class="smaller-font">
+    <pre>
+Task goal: closed_microwave(id:158): 1,turnon_microwave(id:158): 1,on_milk_kitchentable(id:123): 3,inside_pancake_microwave(id:158): 1, 
+      
+Reasoner: 
+Now the task is: # 1. Put one pancake in microwave (id: 158) and switch on microwave (id: 158)
+Scene message: # remember the key object locations and states: [('milk(id:332)', 'INSIDE', 'kitchencabinet(id:129)'), ('milk(id:333)', 'INSIDE', 'kitchencabinet(id:128)'), ('milk(id:335)', 'INSIDE', 'bedroom(id:185)'), ('pancake(id:334)','INSIDE', 'kitchencabinet(id:132)')] and microwave(id:158)'s states are closed,off,kitchencabinet(id:129)'s state is closed,kitchencabinet(id:128)'s state is closed,kitchencabinet(id:132)'s state is closed, 
+      
+Planner:
+#1. Find one pancake
+walk('kitchen(id:50)')
+find('kitchencabinet(id:132)')
+open('kitchencabinet(id:132)')
+find('pancake(id:334)')
+grab('pancake(id:334)')
+close('kitchencabinet(id:132)')
+#2. Put the pancake in the microwave
+find('microwave(id:158)')
+open('microwave(id:158)')
+putin('pancake(id:334)', 'microwave(id:158)')
+close('microwave(id:158)')
+#3. Switch on the microwave
+switchon('microwave(id:158)')
+
+Reasoner: 
+Now the task is: # 2. Put three milk on kitchentable (id: 123)
+Scene message: # remember the key object locations and states: [('milk(id:332)', 'INSIDE', 'kitchencabinet(id:129)'), ('milk(id:333)', 'INSIDE', 'kitchencabinet(id:128)'), ('milk(id:335)', 'INSIDE', 'bedroom(id:185)')] and microwave(id:158)'s states are closed,on,kitchencabinet(id:129)'s state is closed,kitchencabinet(id:128)'s state is closed, 
+
+Planner:
+#find the first milk
+walk('kitchen(id:50)')
+find('kitchencabinet(id:129)')
+open('kitchencabinet(id:129)')
+find('milk(id:332)')
+grab('milk(id:332)')
+close('kitchencabinet(id:129)')
+#put the first milk on the kitchentable
+find('kitchentable(id:123)')
+putback('milk(id:332)', 'kitchentable(id:123)')
+#find the second milk
+find('kitchencabinet(id:128)')
+open('kitchencabinet(id:128)')
+find('milk(id:333)')
+grab('milk(id:333)')
+close('kitchencabinet(id:128)')
+#put the second milk on the kitchentable
+find('kitchentable(id:123)')
+putback('milk(id:333)', 'kitchentable(id:123)')
+#find the third milk
+walk('kitchen(id:50)')
+find('bedroom(id:185)')
+find('milk(id:335)')
+grab('milk(id:335)')
+#put the third milk on the kitchentable
+find('kitchentable(id:123)')
+putback('milk(id:335)', 'kitchentable(id:123)')  
+    </pre>
+  </p>
+</div>
