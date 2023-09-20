@@ -100,10 +100,10 @@ long-term memory:
       
 from actions import walk <obj>, grab <obj>, switchon <obj>, switchoff <obj>, open <obj>, close <obj>, putin <obj> <obj>, putback <obj> <obj>
 
-# remeber if the key object INSIDE kitchencabinet, you should open the kitchencabinet first or the key object INSIDE room, you should walk to the room,and different id represent different items, so note the id number. # remeber you should grab only one item at a time and you can not open a cabinet that has been opened
+#remeber if the key object INSIDE kitchencabinet, you should open the kitchencabinet first or the key object INSIDE room, you should walk to the room,and different id represent different items, so note the id number. # remeber you should grab only one item at a time and you can not open a cabinet that has been opened
 
-# The total task goal: {task_goal}
-# The completed task goal: {completed_goal}
+#The total task goal: {task_goal}
+#The completed task goal: {completed_goal}
 
 short-term memory:
 
@@ -113,8 +113,8 @@ There are some examples:
 {example_task2}
 {example_task3}
 
-# remember the key object locations and states: {message}
-# The task goal: {current_task_goal}
+ #remember the key object locations and states: {message}
+ #The task goal: {current_task_goal}
 def task():
   </pre>
   </p>
