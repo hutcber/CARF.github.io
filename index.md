@@ -513,7 +513,7 @@ def task():
   </p>
 </div>
 
-<div style="text-align: center;">An example of planning-only method, full interaction process of the task goal {on_chicken_kitchentable(id:123): 2}</div>
+<div style="text-align: center;">List 6: An example of planning-only method, full interaction process of the task goal {on_chicken_kitchentable(id:123): 2}</div>
 <div class="textbox">
     <p class="smaller-font">
     <pre>
