@@ -513,7 +513,7 @@ def task():
   </p>
 </div>
 
-<div style="text-align: center;">List 6: An example of planning-only method, full interaction process of the task goal {on_chicken_kitchentable(id:123): 2}</div>
+<div style="text-align: center;">Listing 6: An example of planning-only method, full interaction process of the task goal {on_chicken_kitchentable(id:123): 2}</div>
 <div class="textbox">
     <p class="smaller-font">
     <pre>
@@ -644,7 +644,7 @@ putback('chicken(id:332)', 'kitchentable(id:123)')
 #### 2.Implement of Planning-Reasoning
 In tackling complex task planning, various prior works have explored LLMs playing different roles to complete tasks .Each role takes on distinct responsibilities, thereby alleviating the reasoning burden associated with complex tasks.Our planning-reasoning method delegates the entire task planning process to different roles assumed by LLM. Two agents, acting as the planner and reasoner respectively, collaborate in this method. The reasoner is responsible for comprehending the overall task objective and instructs the planner on the execution steps required. The planner, on the other hand, focuses on action planning for individual execution steps.Like other methods, each planner will accept input of the current initial environment information.
 
-<div style="text-align: center;">List 7: Full prompt for reasoner, the only input is {task_goal}</div>
+<div style="text-align: center;">Listing 7: Full prompt for reasoner, the only input is {task_goal}</div>
 <div class="textbox">
     <p class="smaller-font">
     <pre>
@@ -681,7 +681,7 @@ Reason task lists:
   </p>
 </div>
 
-<div style="text-align: center;">List 8: Full prompt for planner.</div>
+<div style="text-align: center;">Listing 8: Full prompt for planner.</div>
 <div class="textbox">
     <p class="smaller-font">
     <pre>
