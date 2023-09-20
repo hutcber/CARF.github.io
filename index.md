@@ -403,7 +403,9 @@ putback('chicken(id:333)', 'kitchentable(id:123)')
 
 ### B.Experiments
 #### 1.Implement of Planning-only
+
 We have adopted the prompt construction method from ProgPrompt but do not include interaction with the environment.The planning-only method consists of embedding {task_goal}(he current task goal) and {message}(the initial observed state of the environment) directly into the prompt, allowing the agent to generate a complete plan for the task.
+
 <div style="text-align: center;">Listing 5:The full prompt with LLM of planning-only agent to implement task planning</div>
 <div class="textbox">
     <p class="smaller-font">
