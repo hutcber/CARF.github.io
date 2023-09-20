@@ -98,7 +98,7 @@ Task Goal:{input}
     <pre>
 long-term memory:
       
-from actions import walk <obj>, grab <obj>, switchon <obj>, switchoff <obj>, open <obj>, close <obj>, putin <obj> <obj>, putback <obj> <obj>
+from actions import walk (obj), grab (obj), switchon (obj), switchoff (obj), open (obj), close (obj), putin (obj) (obj), putback (obj) (obj)
 
 #remeber if the key object INSIDE kitchencabinet, you should open the kitchencabinet first or the key object INSIDE room, you should walk to the room,and different id represent different items, so note the id number. # remeber you should grab only one item at a time and you can not open a cabinet that has been opened
 
