@@ -283,9 +283,122 @@ find('kitchentable(id:123)')
 putback('chicken(id:333)', 'kitchentable(id:123)')
 # done
 --------------------------------------------------------------------------
-
   </pre>
+  </p>
+</div>
+<div style="text-align: center;">isting 4: An example of our method, full interaction process of the task goal {on_chicken_kitchentable(id:123): 2}</div>
+<div class="textbox">
+    <p class="smaller-font">
+    <pre>
+------------------------------------------------input prompt-------------------------------------------------------------
+long_memory:
+      
+from actions import walk (obj), grab (obj), switchon (obj), switchoff (obj), open (obj), close (obj), putin (obj) (obj), putback (obj) (obj)
+#remeber if the key object INSIDE kitchencabinet, you should open the kitchencabinet first or the key object INSIDE room, you should walk to the roomand different id represent different items, so note the id number.remeber you should grab only one item at a time and you can not open a cabinet that has been opened
+#The total task goal: on_chicken_kitchentable(id:123): 2, 
+#The completed task goal:
+
+short_memory:
+
+There are some examples:
+#remember the key object locations and states: [('chicken(id:333)', 'INSIDE', 'stove(id:150)'), ('chicken(id:332)','INSIDE', 'fridge(id:149)')] and stove(id:150)'s states are closed,of ,fridge(id:149)'s state is closed, #The task goal: on_chicken_kitchentable(id:123): 2
+def task():
+#The goal means the task is "put two chickens on kitchentable" 
+#1.Subgoal Thought: find the first chicken
+#2.Rule Thought: The chicken(id:332) inside fridge(id:149),the fridge is closed, so we should open the fridge first
+open('fridge(id:149)')
+find('chicken(id:332)')
+grab('chicken(id:332)')
+close('fridge(id:149)')
+#1.Subgoal Thought: put the chicken on kitchentable
+#2.Rule Thought: put the chicken(id:332) on kitchentable(id:123)
+find('kitchentable(id:123)')
+putback('chicken(id:332)', 'kitchentable(id:123)')
+#1.Subgoal Thought:find the second chicken
+#2.Rule Thought: The chicken(id:333) inside stove(id:150),the stove is closed, so we should open the stove first
+open('stove(id:150)')
+find('chicken(id:333)')
+grab('chicken(id:333)')
+close('stove(id:150)')
+#1.Subgoal Thought: put the chicken on kitchentable
+#2.Rule Thought: put the chicken(id:333) on kitchentable(id:123)
+find('kitchentable(id:123)')
+putback('chicken(id:333)', 'kitchentable(id:123)')
+#done
+
+#remember the key object current locations and states: [('chicken(id:332)', 'INSIDE', 'fridge(id:149)')] and fridge(id:149)'s state is closed, #The task goal: on_chicken_kitchentable(id:123): 1
+def task():
+#The goal means the task is "put one chicken on kitchentable" #1.Subgoal Thought: find the chicken
+#2.Rule Thought: The chicken(id:332) inside fridge(id:149), the fridge is closed,so we should open the fridge first. find('fridge(id:149)')
+open('fridge(id:149)')
+grab('chicken(id:332)')
+close('fridge(id:149)')
+#1.Subgoal Thought: put the chicken on the kitchentable
+#2.Rule Thought: put the chicken(id:332) on the kitchentable(id:123). find('kitchentable(id:123)')
+putback('chicken(id:332)', 'kitchentable(id:123)')
+#done
+
+#remember the key object locations and states: [('milk(id:332)', 'INSIDE', 'kitchencabinet(id:128)'), ('milk(id:333)','INSIDE', 'kitchencabinet(id:130)')] and kitchencabinet(id:128)'s state is closed,kitchencabinet(id:130)'s state is closed,kitchencabinet(id:126)'s state is closed, 
+#The task goal: on_milk_kitchentable(id:123): 2
+def task():
+#The goal means the task is "put two milk on kitchentable" 
+#1.Subgoal Thought: find the first milk
+#2.Rule Thought: The milk(id:332) inside kitchencabinet(id:128), the kitchencabinet is closed,so we should open the kitchencabinet first.
+walk('kitchen(id:50)')
+find('kitchencabinet(id:128)')
+open('kitchencabinet(id:128)')
+find('milk(id:332)')
+grab('milk(id:332)')
+close('kitchencabinet(id:128)')
+#1.Subgoal Thought: put the first milk on the kitchentable
+#2.Rule Thought: put the milk(id:332) on the kitchentable(id:123)
+find('kitchentable(id:123)')
+putback('milk(id:332)', 'kitchentable(id:123)')
+#1.Subgoal Thought: find the second milk
+#2.Rule Thought: The milk(id:333) inside kitchencabinet(id:130), the kitchencabinet is closed,so we should open the kitchencabinet first.
+find('kitchencabinet(id:130)')
+open('kitchencabinet(id:130)')
+find('milk(id:333)')
+grab('milk(id:333)')
+close('kitchencabinet(id:130)')
+#1.Subgoal Thought: put the second milk on the kitchentable
+#2.Rule Thought: put the milk(id:333) on the kitchentable(id:123)
+find('kitchentable(id:123)')
+putback('milk(id:333)', 'kitchentable(id:123)')
+#done
+
+#remember the key object locations and states: [('chicken(id:332)', 'INSIDE', 'fridge(id:149)'), ('chicken(id:333)','INSIDE', 'fridge(id:149)'), ('chicken(id:334)', 'INSIDE', 'stove(id:150)')] and fridge(id:149)'s state is closed,fridge(id:149)'s state is closed,stove(id:150)'s state is closed, 
+#The task goal: on_chicken_kitchentable(id:123): 2
+def task(): 
+-------------------------------------------------------end----------------------------------------------------------
+
+-------------------------------------------------our agent output---------------------------------------------------- 
+#The goal means the task is "put two chickens on kitchentable" 
+#1.Subgoal Thought: find the first chicken
+#2.Rule Thought: The chicken(id:332) inside fridge(id:149),the fridge is closed, so we should open the fridge first
+open('fridge(id:149)')
+find('chicken(id:332)')
+grab('chicken(id:332)')
+close('fridge(id:149)')
+#1.Subgoal Thought: put the chicken on kitchentable
+#2.Rule Thought: put the chicken(id:332) on kitchentable(id:123)
+find('kitchentable(id:123)')
+putback('chicken(id:332)', 'kitchentable(id:123)')
+#1.Subgoal Thought:find the second chicken
+#2.Rule Thought: The chicken(id:333) inside fridge(id:149),the fridge is closed, so we should open the fridge first
+open('fridge(id:149)')
+find('chicken(id:333)')
+grab('chicken(id:333)')
+close('fridge(id:149)')
+#1.Subgoal Thought: put the chicken on kitchentable
+#2.Rule Thought: put the chicken(id:333) on kitchentable(id:123)
+find('kitchentable(id:123)')
+putback('chicken(id:333)', 'kitchentable(id:123)')
+#done
+-------------------------------------------------------end---------------------------------------------------------
+    </pre>
   </p>
 </div>
 
 ### B.Experiments
+We have adopted the prompt construction method from ProgPrompt[6] but do not include interaction with the environment.The planning-only method consists of embedding {task_goal}(he current task goal) and {message}(the initial observed state of the environment) directly into the prompt, allowing the agent to generate a complete plan for the task.
