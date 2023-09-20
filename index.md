@@ -89,6 +89,34 @@ Task Goal:closed_stove(id:150): 1,turnon_stove(id:150): 1,inside_poundcake_stove
 return subgoal[closed_stove(id:150):1,turnon_stove(id:150):1 ,inside_poundcake_stove(id:150):3],subgoal[on_milk_kitchentable(id:123): 2]
 
 Task Goal:{input} 
-</pre>
-    </p>
+  </pre>
+  </p>
+</div>
+<div style="text-align: center;">Listing 2: The full prompt with LLM of our agent to implement task planning</div>
+<div class="textbox">
+    <p class="smaller-font">
+    <pre>
+long-term memory:
+      
+from actions import walk <obj>, grab <obj>, switchon <obj>, switchoff <obj>, open <obj>, close <obj>, putin <obj> <obj>, putback <obj> <obj>
+
+# remeber if the key object INSIDE kitchencabinet, you should open the kitchencabinet first or the key object INSIDE room, you should walk to the room,and different id represent different items, so note the id number. # remeber you should grab only one item at a time and you can not open a cabinet that has been opened
+
+# The total task goal: {task_goal}
+# The completed task goal: {completed_goal}
+
+short-term memory:
+
+There are some examples:
+
+{example_task1}
+{example_task2}
+{example_task3}
+
+# remember the key object locations and states: {message}
+# The task goal: {current_task_goal}
+def task():
+  </pre>
+  </p>
+</div>
 
