@@ -17,7 +17,7 @@ Recent planning methods based on Large Language Models typically employ the In-C
 <iframe width="780" height="400" src="https://www.youtube.com/embed/rGmoljGmKPI?si=5OGDlNhLa8FowUrK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
  <video id="teaser" autoplay muted loop height="100%">
-            <source src="video/final_720.mp4"
+            <source src="./video/final_720.mp4"
                     type="video/mp4">
 </video>
 
