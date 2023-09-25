@@ -20,6 +20,7 @@ Recent planning methods based on Large Language Models typically employ the In-C
             <source src="video/final_720.mp4"
                     type="video/mp4">
 </video>
+
 ## Results
 Example of our frameworks for long-horizon task planning:
 
