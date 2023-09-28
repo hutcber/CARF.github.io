@@ -10,20 +10,6 @@
 [author1](https://www.yuque.com/zhangjiatao-grdyv/rn49ht/lq7xzy4xmxgrpgz9), [author2](https://www.yuque.com/zhangjiatao-grdyv/rn49ht/vsarazgdts43o7y4)
 -->
 
-.video-container {
-  display: flex;
-}
-
-.publication-video {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
-
-    overflow: hidden;
-    border-radius: 10px !important;
-}
-
 ## Abstract
 Recent planning methods based on Large Language Models typically employ the In-Context Learning paradigm. Complex long-horizon planning tasks require more context(including instructions and demonstrations) to guarantee that the generated plan can be executed correctly. However, in such conditions, LLMs may overlook(unfaithful) the rules in the given context, resulting in the generated plans being invalid or even leading to dangerous actions. In this paper, we investigate the faithfulness of LLMs for complex long-horizon tasks. Inspired by human intelligence, we introduce a novel framework named FLTRNN. FLTRNN employs a language-based RNN structure to integrate task decomposition and memory management into LLM planning inference, which could effectively improve the faithfulness of LLMs and make the planner more reliable. We conducted experiments in VirtualHome household tasks. Results show that our model significantly improves faithfulness and success rates for complex long-horizon tasks.
 
@@ -55,21 +41,20 @@ Our framework takes the task goal as input and produces the task plan as output.
 </div>
 
 ## Experiment
-
-<div class="video-container">
- <div class="publication-video">
+<div style="display: flex;">
+ <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; overflow: hidden; border-radius: 10px;">
         <video poster="" id="mask" autoplay muted loop playsinline height="100%">
           <source src="./video/Planning_only_zm.mp4"
                   type="video/mp4">
         </video>
  </div>
- <div class="publication-video">
+ <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; overflow: hidden; border-radius: 10px;">
         <video poster="" id="mask" autoplay muted loop playsinline height="100%">
           <source src="./video/Planning-Reasonning_zm.mp4"
                   type="video/mp4">
         </video>
  </div>
-  <div class="publication-video">
+  <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; overflow: hidden; border-radius: 10px;">
         <video poster="" id="mask" autoplay muted loop playsinline height="100%">
           <source src="./video/Main_1.5_720.mp4"
                   type="video/mp4">
