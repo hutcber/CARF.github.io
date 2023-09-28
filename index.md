@@ -74,6 +74,7 @@ Our framework takes the task goal as input and produces the task plan as output.
                   type="video/mp4">
         </video>
  </div>
+</div>
 
 ## Appendix
 ### A.Method
