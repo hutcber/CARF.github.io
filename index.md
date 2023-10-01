@@ -41,7 +41,7 @@ Our framework takes the task goal as input and produces the task plan as output.
 </div>
 
 ## Experiment
- <div>
+ <div style="display: flex;">
         <video width="320" height="240" controls>
           <source src="./video/Planning_only_zm.mp4"
                   type="video/mp4">
