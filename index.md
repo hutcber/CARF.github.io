@@ -48,18 +48,7 @@ Our framework takes the task goal as input and produces the task plan as output.
                   type="video/mp4">
         </video>
  </div>
- <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; overflow: hidden; border-radius: 10px;">
-        <video poster="" id="mask" autoplay muted loop playsinline height="100%">
-          <source src="./video/Planning-Reasonning_zm.mp4"
-                  type="video/mp4">
-        </video>
- </div>
-  <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; overflow: hidden; border-radius: 10px;">
-        <video poster="" id="mask" autoplay muted loop playsinline height="100%">
-          <source src="./video/Main_1.5_720.mp4"
-                  type="video/mp4">
-        </video>
- </div>
+
 </div>
 
 ## Appendix
