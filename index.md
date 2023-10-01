@@ -63,6 +63,11 @@ Our framework takes the task goal as input and produces the task plan as output.
           </video>
    </div>
 </div>
+<div style="display: flex;">
+  <p>A.Planning-only</p>
+  <p>B.Planning-Reasonning</p>
+  <p>C.Ours</p>
+</div>
  
 ## Appendix
 ### A.Method
