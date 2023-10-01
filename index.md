@@ -41,7 +41,7 @@ Our framework takes the task goal as input and produces the task plan as output.
 </div>
 
 ## Experiment
- <div style="position: relative; width: 20%; padding-bottom: 56.25%; overflow: hidden; border-radius: 10px;">
+ <div style="width: 20%; ">
         <video poster="" id="mask" autoplay muted loop playsinline height="100%">
           <source src="./video/Planning_only_zm.mp4"
                   type="video/mp4">
