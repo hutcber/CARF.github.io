@@ -41,27 +41,28 @@ Our framework takes the task goal as input and produces the task plan as output.
 </div>
 
 ## Experiment
- <div style="display: flex;">
-        <video width="320" height="240" controls>
-          <source src="./video/Planning_only_zm.mp4"
-                  type="video/mp4">
-        </video>
- </div>
 
-  <div>
-        <video width="320" height="240" controls>
-          <source src="./video/Planning-Reasonning_zm.mp4"
-                  type="video/mp4">
-        </video>
- </div>
+<div style="display: flex;">
+    <div>
+          <video width="320" height="240" controls autoplay>
+            <source src="./video/Planning_only_zm.mp4"
+                    type="video/mp4">
+          </video>
+    </div>
+    <div>
+          <video width="320" height="240" controls autoplay>
+            <source src="./video/Planning-Reasonning_zm.mp4"
+                    type="video/mp4">
+          </video>
+    </div>
  
-  <div>
-        <video width="320" height="240" controls>
-          <source src="./video/Main_1.5_720.mp4"
-                  type="video/mp4">
-        </video>
- </div>
-
+    <div>
+          <video width="320" height="240" controls autoplay>
+            <source src="./video/Main_1.5_720.mp4"
+                    type="video/mp4">
+          </video>
+   </div>
+</div>
  
 ## Appendix
 ### A.Method
