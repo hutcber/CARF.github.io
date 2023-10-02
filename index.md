@@ -64,7 +64,7 @@ Our framework takes the task goal as input and produces the task plan as output.
    </div>
 </div>
 <div style="display: flex;">
-  <pre style="text-align: center;  background-color: white; border: none;"> A.Planning-only             B.Planning-Reasonning                   C.Ours</pre>
+  <pre style="text-align: center;  background-color: white; border: none;">           A.Planning-only             B.Planning-Reasonning                   C.Ours</pre>
 </div>
  
 ## Appendix
