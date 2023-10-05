@@ -69,13 +69,13 @@ Our framework takes the task goal as input and produces the task plan as output.
 ### Real Robot Demo
 <div style="display: flex;">
     <div>
-          <video controls autoplay>
+          <video  width="400" height="720" controls autoplay>
             <source src="./video/prepare_drink_zm.mp4"
                     type="video/mp4">
           </video>
    </div>
    <div>
-          <video controls autoplay>
+          <video  width="400" height="720" controls autoplay>
             <source src="./video/clean_up_table_zm.mp4"
                     type="video/mp4">
           </video>
