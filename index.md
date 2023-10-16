@@ -37,7 +37,7 @@ Our framework takes the task goal as input and produces the task plan as output.
 <br/>
 
 <div align='center'>
-  <img src="./Method_full_3.pdf">
+  <img src="./method.png">
 </div>
 
 ## Experiment
