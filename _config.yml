@@ -1,9 +1,9 @@
-title: Faithful LLMs for Long-Horizon Task Planning
+title: Causal Inference Augmented Reflection for Long-Term Planning via LLMs
 remote_theme: pages-themes/cayman@v0.2.0
-github:
-  zip_url: http://example.com/download.zip
-  repository_url: https://github.com/tannl/FLTRNN
+# github:
+#   zip_url: http://example.com/download.zip
+#   repository_url: https://github.com/tannl/FLTRNN
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
-description: ICRA 2024<br/>Jiatao Zhang, Lanling Tang, Yufan Song, Qiwei Meng, Haofu Qian, Jun Shao, Wei Song, Shiqiang Zhu, Jason Gu
+description: ICRA 2025<br/>Tuocheng Hu, Jiatao Zhang, Yufan Song, Wei Song, Shiqiang Zhu
 
