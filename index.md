@@ -1,20 +1,20 @@
-<!-- <h1 align="center"> Faithful LLMs for Long-Horizon Task Planning </h1> -->
+<!-- <h1 align="center"> Causal Inference Augmented Reflection for Long-Term Planning via LLMs </h1> -->
 
 <!--
 <div align='center'>
-  <font size=4 color=black>ICRA 2024</font>
+  <font size=4 color=black>ICRA 2025</font>
 </div>
 -->
 
 <!--
-[author1](https://www.yuque.com/zhangjiatao-grdyv/rn49ht/lq7xzy4xmxgrpgz9), [author2](https://www.yuque.com/zhangjiatao-grdyv/rn49ht/vsarazgdts43o7y4)
+[author1](https://www.yuque.com/zhangjiatao-grdyv/rn49ht/lz080qshd6weqi0g)
 -->
 
 ## Abstract
 Recent developments suggest that Large Language Models (LLMs) can identify and correct errors in their generated responses using reflection mechanisms. However, when applied to long-term task planning, these methods reveal significant limitations. Reflection methods may neglect the causes of errors in earlier planning, producing results that contain inaccurate information, thereby leading to further mistakes in subsequent planning. This paper explores the reflection frameworks suitable for long-term task planning. Inspired by human causal cognitive processes, we introduce the Causal Reasoning Augmented Reflection Framework (CARF). CARF employs systematic causal reasoning to accurately identify the root causes of errors and to generate effective action plan revisions by integrating association information. We conducted experiments with household tasks in Alfworld, and the results show that our framework substantially increases the success rate in complex long-term tasks.
 
 ## Paper
-<iframe  width="400" height="420" src="./Causal Reasoning Augmented Reflection for  Long-Term Planning via LLMs.pdf"></iframe>
+<iframe  width="400" height="420" src="./Causal_Reasoning_Augmented_Reflection_for_Long-Term_Planning_via_LLMs.pdf"></iframe>
 
 ## Video
 <iframe width="100%" height="420" src="https://www.youtube.com/embed/wRxH_F7mPKQ?si=WXvnpf3U-jjUIryt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
