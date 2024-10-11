@@ -60,5 +60,5 @@ Our framework operates by taking historical task information and environmental f
     </div>
 </div>
 <div style="display: flex;">
-  <pre style="text-align: center;  background-color: white; border: none;">             A.Initial Trial                                    B.Improved Trial </pre>
+  <pre style="text-align: center;  background-color: white; border: none;">             A.Initial Trial                                              B.Improved Trial </pre>
 </div>
