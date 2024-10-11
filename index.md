@@ -47,18 +47,18 @@ Our framework operates by taking historical task information and environmental f
 
 <div style="display: flex;">
     <div>
-          <video width="400" height="240" controls autoplay>
+          <video width="380" height="240" controls autoplay>
             <source src="./fail1.mp4"
                     type="video/mp4">
           </video>
     </div>
     <div>
-          <video width="400" height="240" controls autoplay>
+          <video width="380" height="240" controls autoplay>
             <source src="./succ1.mp4"
                     type="video/mp4">
           </video>
     </div>
 </div>
 <div style="display: flex;">
-  <pre style="text-align: center;  background-color: white; border: none;">             A.Initial Trial             B.Improved Trial </pre>
+  <pre style="text-align: center;  background-color: white; border: none;">             A.Initial Trial                       B.Improved Trial </pre>
 </div>
