@@ -64,7 +64,7 @@ Our framework operates by taking historical task information and environmental f
 
 ## Appendix
 ### A.Method
-#### 1.Prompt of Task Decomposition
+#### 1.Prompt for Counterfactual Reasoning
 
 <style>
     .textbox {
@@ -85,7 +85,7 @@ Our framework operates by taking historical task information and environmental f
         font-size: smaller;
     }
 </style>
-<div style="text-align: center;">Listing 1: Prompt for Counterfactual Reasoning, We need to input the example from the previous attempt and the failed plan.</div>
+<div style="text-align: center;">Listing 1: Prompt for Counterfactual Reasoning, we need to input the example from the previous attempt and the failed plan.</div>
 <div class="textbox">
     <p class="smaller-font">
     <pre>
@@ -111,16 +111,92 @@ I will give you the example to help you better understand how to use counterfact
 
 =================The example=====================
 Counterfactual reasoning analysis:
-1. If I add the action "*\**" before the action "*\**", then I don't get this failure. The first root cause of the task failure was due to *\**.
-2. If I add the action "*\**" after the action "*\**", then I don't get this failure. The second root cause of the task failure was due to *\**.
-3. If I correct the action "*\**" to the action "*\**", then I don't get this failure. The third root cause of the task failure was due to *\**.
+1. If I add the action "***" before the action "***", then I don't get this failure. The first root cause of the task failure was due to ***.
+2. If I add the action "***" after the action "***", then I don't get this failure. The second root cause of the task failure was due to ***.
+3. If I correct the action "***" to the action "***", then I don't get this failure. The third root cause of the task failure was due to ***.
 
 
 Here is the history you need for counterfactual reasoning:
 Interact with a household to solve a task. Here is an examples.
 {react_example_input}
 
-Here is the task: {input}
+Here is the task: {task}
+
+Counterfactual reasoning analysis:
   </pre>
+  </p>
+</div>
+
+#### 2.Prompt for Associative Reasoning
+
+<div style="text-align: center;">Listing 2: Prompt for Associative Reasoning, we need to input the failed plan from the previous attempt.</div>
+
+<div class="textbox">
+    <p class="smaller-font">
+    <pre>
+
+You will be given the history of a past experience in which you were placed in an environment. First, identify the names of the items included in the task goal, excluding information about states such as 'clean', 'heat', 'cool', etc. Then, based on the identified item name, review the results of your sighting and determine in which container the item that matches the item name was placed prior to the move, i.e., where you saw the item. When no items related to the task goal are found, provide the containers that have been explored , i.e. in which container the search failed. You do not need to focus on the environmental observations in the examples. Your output only needs to contain what you saw.
+
+Here are two examples:
+=================The first example=====================
+{example1}
+
+=================The second example=====================
+{example2}
+
+Here is the history of the past experience:
+{past_experience}
+
+Associative reasoning analysis:
+  </pre>
+  </p>
+</div>
+
+#### 3.Prompt of Plan Revision
+
+<div style="text-align: center;">Listing 3: Prompt for Plan Revision, we need to input the above two analyses and task information.</div>
+
+<div class="textbox">
+    <p class="smaller-font">
+    <pre>
+
+You will be given the history of a past experience in which you were placed in an environment and given a task to complete. You were unsuccessful in completing the task.You will be provided with an analysis of counterfactual reasoning and association reasoning based on your previous experience. Please create a plan for the next attempt, incorporating insights from these two analyses. You need to output in the format of the example without any additional redundant content.
+I will give you some examples to help you better understand how to generate plan.
+
+=================The first example=====================
+{example1}
+
+Here is the history you need for generating plan:
+{past_experience}
+
+{counterfactual_reasoning}
+
+{association_reasoning}
+
+Plan:
+  </pre>
+  </p>
+</div>
+### B.Experiments
+#### 1.Implement of Reflexion
+
+We have adopted the reflexion method from Reflexion, which integrates a reflection process during multiple trials in React, obtaining the next action based on the reflection from the previous trial.
+
+<div style="text-align: center;">Listing 5:The prompt with LLM of react-reflexion agent to implement task planning</div>
+<div class="textbox">
+    <p class="smaller-font">
+    <pre>
+You will be given the history of a past experience in which you were placed in an environment and given a task to complete. You were unsuccessful in completing the task. Do not summarize your environment, but rather think about the strategy and path you took to attempt to complete the task. Devise a concise, new plan of action that accounts for your mistake with reference to specific actions that you should have taken. For example, if you tried A and B but forgot C, then devise a plan to achieve C with environment-specific actions. You will need this later when you are solving the same task. Give your plan after "Plan". Here are two examples:
+
+{FEW_SHOT_EXAMPLES}
+
+{past_experience}
+
+
+Plans from past attempts:
+Trial #{i}: {Plan_i}
+
+New plan:
+    </pre>
   </p>
 </div>
