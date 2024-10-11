@@ -61,3 +61,66 @@ Our framework operates by taking historical task information and environmental f
 <div style="display: flex;">
   <pre style="text-align: center;  background-color: white; border: none;">             A.Initial Trial                                 B.Improved Trial </pre>
 </div>
+
+## Appendix
+### A.Method
+#### 1.Prompt of Task Decomposition
+
+<style>
+    .textbox {
+        background-color: #f2f2f2;
+        padding: 10px;
+        font-family: "Times New Roman", Times, serif;
+    }
+
+    .title {
+        text-align: center;
+    }
+
+    .content {
+        font-weight: bold;
+    }
+
+    .smaller-font {
+        font-size: smaller;
+    }
+</style>
+<div style="text-align: center;">Listing 1: Prompt for Counterfactual Reasoning, We need to input the example from the previous attempt and the failed plan.</div>
+<div class="textbox">
+    <p class="smaller-font">
+    <pre>
+You will be given the history of a past experience in which you were placed in an environment and given a task to complete. you were unsuccessful in completing the task. You will also be given a list of key actions that can be used to complete the task. Then, review the past experience and identify the key actions that led to task failure or execution failure based on the descriptions in the list of actions, and use counterfactual reasoning to modify or add the correct actions based on the grammatical requirements in the list of actions to get to the root of the problem. Finally, find the root cause of task failure based on the grammatical requirements in the action list. Note: Do not seek the causes of failure from task goal definition or actions in the action list. Ensure tasks can be completed within the range of actions listed. A specific action fails because its prerequisites mentioned in the action list were not met. Do not have more than three counterfactual reasoning analysis. 
+
+=================Action List=====================
+When you do not take the object or not go to the container but want to use the following actions, you will fail.
+1.heat {obj} with microwave: Heat the specified object (obj) with the microwave.
+2.clean {obj} with sinkbasin: Cleans the specified object (obj) with the sinkbasin.
+3.cool {obj} with fridge : Cool the specified object (obj) with the fridge.
+
+When you do not see the object or go to the container but want to use the following actions, you will fail.
+4.take {obj} from {recep}: Take the specified object (obj) from the specified container (recep).
+5.put {obj} in/on {recep}: Put the specified object (obj) into the specified container (recep).
+
+When the target container is not present but you want to use the following actions, you will fail.
+6.go to {recep}: Use it when you want to go to the specified container (recep).
+
+When you do not see the container but want to use the following actions, you will fail.
+7.open {recep}: Use it when you want to see the items inside the container."""
+
+I will give you the example to help you better understand how to use counterfactual reasoning to generate counterfactual reasoning analysis.
+
+=================The example=====================
+Counterfactual reasoning analysis:
+1. If I add the action "*\**" before the action "*\**", then I don't get this failure. The first root cause of the task failure was due to *\**.
+2. If I add the action "*\**" after the action "*\**", then I don't get this failure. The second root cause of the task failure was due to *\**.
+3. If I correct the action "*\**" to the action "*\**", then I don't get this failure. The third root cause of the task failure was due to *\**.
+
+
+Here is the history you need for counterfactual reasoning:
+Interact with a household to solve a task. Here is an examples.
+{react_example_input}
+
+Here is the task: {input}
+  </pre>
+  </p>
+</div>
