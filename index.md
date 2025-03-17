@@ -17,7 +17,7 @@ Recent developments suggest that Large Language Models (LLMs) can identify and c
 <iframe  width="400" height="420" src="./Causal_Reasoning_Augmented_Reflection_for_Long-Term_Planning_via_LLMs.pdf"></iframe>
 
 ## Video
-<iframe width="100%" height="420" src="https://www.youtube.com/embed/FSnNfoU0BK0?si=Tz1RhWBBs9c3JN3E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bDYz9beUUgc?si=BDGy72KEdKV0TjOy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Results
 Example of our frameworks for long-term task planning:
