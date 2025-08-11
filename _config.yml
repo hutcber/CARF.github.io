@@ -5,4 +5,4 @@ github:
   repository_url: https://github.com/hutcber/CARF
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
-description: CCIR 2025<br/>Tuocheng Hu, Jiatao Zhang, Qingmiao Liang, Yufan Song, Wei Song, Shiqiang Zhu
+description: CCIR 2025<br/>Tuocheng Hu, Jiatao Zhang, Qingmiao Liang, Zeng Gu, Yufan Song, Wei Song, Shiqiang Zhu
